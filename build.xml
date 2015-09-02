@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="symfony-ci-sample" default="build">
+    <property name="basedir" value="." override="true" />
+
+    <target name="build" depends="phpunit" />
+    <target name="phpunit">
+        <exec executable="${basedir}/bin/phpunit" checkreturn="true">
+            <arg line="-c ${basedir}/app/phpunit.xml" />
+        </exec>
+    </target>
+</project>
