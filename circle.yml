@@ -1,0 +1,19 @@
+machine:
+    php:
+        version: 5.6.5
+    services:
+        - mysql
+        - postgresql
+        - redis
+        - mongodb
+    timezone: Asia/Tokyo
+
+dependencies:
+    pre:
+        #composer install
+        - composer config -g github-oauth.github.com ${GITHUB_ACCESS_TOKEN}
+        - composer install --prefer-source --no-interaction
+
+test:
+    override:
+        - .bin/phing build
