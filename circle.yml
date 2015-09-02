@@ -18,4 +18,5 @@ dependencies:
 
 test:
     override:
+        - pwd
         - .bin/phing build
