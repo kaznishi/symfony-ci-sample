@@ -12,7 +12,7 @@ dependencies:
     pre:
         #composer install
         - yes '' | /home/ubuntu/.phpenv/versions/5.6.5/bin/pecl install -f mongo
-        - echo "extension=mongo.so" > /home/ubuntu/.phpenv/versions/5.6.5/etc/conf.d/mongo.ini
+        #- echo "extension=mongo.so" > /home/ubuntu/.phpenv/versions/5.6.5/etc/conf.d/mongo.ini
         - composer config -g github-oauth.github.com ${GITHUB_ACCESS_TOKEN}
         - composer install --prefer-source --no-interaction
 
