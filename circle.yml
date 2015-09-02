@@ -11,16 +11,8 @@ machine:
 dependencies:
     pre:
         #composer install
-        - cd /tmp
-        - wget http://pecl.php.net/get/mongo-1.6.11.tgz
-        - tar zxvf mongo-1.6.11.tgz
-        - cd mongo-1.6.11
-        - phpize
-        - ./configure
-        - make
-        - make install
+        - yes '' | /home/ubuntu/.phpenv/versions/5.6.5/bin/pecl install -f mongo
         - echo "extension=mongo.so" > /home/ubuntu/.phpenv/versions/5.6.5/etc/conf.d/mongo.ini
-        - cd ~/symfony-ci-sample
         - composer config -g github-oauth.github.com ${GITHUB_ACCESS_TOKEN}
         - composer install --prefer-source --no-interaction
 
