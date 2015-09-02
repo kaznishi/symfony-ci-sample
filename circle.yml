@@ -15,6 +15,7 @@ dependencies:
         #- echo "extension=mongo.so" > /home/ubuntu/.phpenv/versions/5.6.5/etc/conf.d/mongo.ini
         - composer config -g github-oauth.github.com ${GITHUB_ACCESS_TOKEN}
         - composer install --prefer-source --no-interaction
+        - cp ./app/phpunit.xml.dist ./app/phpunit.xml
 
 test:
     override:
