@@ -26,6 +26,14 @@ parameters:
     test_database_postgres_name:     symfony
     test_database_postgres_user:     root
     test_database_postgres_password: ~
+    mongodb_name: symfony_mongo
+    mongodb_host: localhost
+    mongodb_port: 27017
+    mongodb_options: {  }
+    test_mongodb_name: symfony_mongo_test
+    test_mongodb_host: localhost
+    test_mongodb_port: 27017
+    test_mongodb_options: {  }
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 

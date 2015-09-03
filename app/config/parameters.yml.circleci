@@ -24,6 +24,14 @@ parameters:
     test_database_postgres_name: circle_postgres
     test_database_postgres_user: postgres
     test_database_postgres_password: ''
+    mongodb_name: mongo_circle
+    mongodb_host: localhost
+    mongodb_port: 27017
+    mongodb_options: {  }
+    test_mongodb_name: mongo_sample_circle
+    test_mongodb_host: localhost
+    test_mongodb_port: 27017
+    test_mongodb_options: {  }
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
