@@ -8,6 +8,11 @@ machine:
         - mongodb
     timezone: Asia/Tokyo
 
+database:
+  post:
+    - mysql -u root < $HOME/$CIRCLE_PROJECT_REPONAME/circle_setup/mysql.sql
+    - psql -U postgres -f $HOME/$CIRCLE_PROJECT_REPONAME/circle_setup/postgres.sql
+
 dependencies:
     pre:
         #composer install

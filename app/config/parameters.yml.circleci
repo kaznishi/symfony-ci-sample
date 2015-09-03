@@ -3,26 +3,26 @@ parameters:
     database_default_driver: pdo_mysql
     database_default_host: 127.0.0.1
     database_default_port: null
-    database_default_name: circle_test
-    database_default_user: ubuntu
+    database_default_name: circle_mysql
+    database_default_user: root
     database_default_password: ''
     test_database_default_driver: pdo_mysql
     test_database_default_host: 127.0.0.1
     test_database_default_port: null
-    test_database_default_name: circle_test
-    test_database_default_user: ubuntu
+    test_database_default_name: circle_mysql
+    test_database_default_user: root
     test_database_default_password: ''
     database_postgres_driver: pdo_pgsql
     database_postgres_host: 127.0.0.1
     database_postgres_port: 5432
-    database_postgres_name: circle_postgres_test
-    database_postgres_user: ubuntu
+    database_postgres_name: circle_postgres
+    database_postgres_user: postgres
     database_postgres_password: ''
     test_database_postgres_driver: pdo_pgsql
     test_database_postgres_host: 127.0.0.1
     test_database_postgres_port: 5432
-    test_database_postgres_name: circle_postgres_test
-    test_database_postgres_user: ubuntu
+    test_database_postgres_name: circle_postgres
+    test_database_postgres_user: postgres
     test_database_postgres_password: ''
     mailer_transport: smtp
     mailer_host: 127.0.0.1
