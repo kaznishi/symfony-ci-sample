@@ -39,6 +39,19 @@ abstract class MainTestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Postgres用のEntityManagerを取得する
+     * @return \Doctrine\ORM\EntityManager
+     */
+    public function getPostgresEntityManager()
+    {
+        static $pEm;
+        if (empty($pEm)) {
+            $pEm = $this->getKernel()->getContainer()->get('doctrine.orm.postgres_entity_manager');
+        }
+        return $pEm;
+    }
+
+    /**
      * Fiextureを生成する
      * @param array $objects
      */
@@ -69,6 +82,31 @@ abstract class MainTestCase extends \PHPUnit_Framework_TestCase
         // 外部キー制約を元に戻す
         $em->getConnection()->exec('SET foreign_key_checks = 1');
     }
+
+    protected function loadPostgresFixtures($objects) {
+
+        if (!is_array($objects)) {
+            $objects = array($objects);
+        }
+
+        $loader = new Loader($this->getKernel()->getContainer());
+        $em = $this->getPostgresEntityManager();
+
+
+        foreach ($objects as $object) {
+            if (class_exists($object)) {
+                $loader->addFixture(new $object);
+            }
+        }
+
+        $fixtures = $loader->getFixtures();
+        $purger = new ORMPurger($em);
+        $purger->setPurgeMode(ORMPurger::PURGE_MODE_TRUNCATE);
+        $executor = new ORMExecutor($em, $purger);
+        $executor->execute($fixtures);
+
+    }
+
 
     /**
      * EntityManagerのモックを取得する
