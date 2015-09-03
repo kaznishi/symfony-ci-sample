@@ -23,7 +23,7 @@ class ShelfRepositoryTest extends MainTestCase
 
         $repository = $em->getRepository('UsePostgresqlBundle:Shelf');
         $shelves = $repository->findOneBy(['name' => 'asdf']);
-        $this->assertNotEquals(1, count($shelves));
+        $this->assertEquals(1, count($shelves));
 
     }
 
