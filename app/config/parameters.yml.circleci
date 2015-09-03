@@ -1,0 +1,17 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: circle_test
+    database_user: ubuntu
+    database_password: ''
+    test_database_host: 127.0.0.1
+    test_database_port: null
+    test_database_name: circle_test
+    test_database_user: ubuntu
+    test_database_password: ''
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: 8b8399adf0976ce98b1c465aceed1b80a98e8b60
