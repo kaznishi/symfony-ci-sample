@@ -17,10 +17,26 @@ swiftmailer:
 
 doctrine:
     dbal:
-        driver:   pdo_mysql
-        host:     "%test_database_host%"
-        port:     "%test_database_port%"
-        dbname:   "%test_database_name%"
-        user:     "%test_database_user%"
-        password: "%test_database_password%"
-        charset:  UTF8
+        connections:
+            default:
+                driver:   %test_database_default_driver%
+                host:     %test_database_default_host%
+                port:     %test_database_default_port%
+                dbname:   %test_database_default_name%
+                user:     %test_database_default_user%
+                password: %test_database_default_password%
+                charset:  UTF8
+            postgres:
+                driver:   %test_database_postgres_driver%
+                host:     %test_database_postgres_host%
+                port:     %test_database_postgres_port%
+                dbname:   %test_database_postgres_name%
+                user:     %test_database_postgres_user%
+                password: %test_database_postgres_password%
+                charset:  UTF8
+
+doctrine_mongodb:
+    default_database: %test_mongodb_name%
+    connections:
+        default:
+            server: mongodb://%test_mongodb_host%:%test_mongodb_port%

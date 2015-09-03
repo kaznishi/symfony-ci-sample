@@ -52,13 +52,25 @@ assetic:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   pdo_mysql
-        host:     "%database_host%"
-        port:     "%database_port%"
-        dbname:   "%database_name%"
-        user:     "%database_user%"
-        password: "%database_password%"
-        charset:  UTF8
+        default_connection: default
+        connections:
+            default:
+                driver:   %database_default_driver%
+                host:     %database_default_host%
+                port:     %database_default_port%
+                dbname:   %database_default_name%
+                user:     %database_default_user%
+                password: %database_default_password%
+                charset:  UTF8
+            postgres:
+                driver:   %database_postgres_driver%
+                host:     %database_postgres_host%
+                port:     %database_postgres_port%
+                dbname:   %database_postgres_name%
+                user:     %database_postgres_user%
+                password: %database_postgres_password%
+                charset:  UTF8
+
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
@@ -68,8 +80,29 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+        default_entity_manager: default
+        entity_managers:
+            default:
+                connection: default
+                mappings:
+                    AppBundle: ~
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+            postgres:
+                connection: postgres
+                mappings:
+                    UsePostgresqlBundle: ~
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+
+doctrine_mongodb:
+    default_database: %mongodb_name%
+    connections:
+        default:
+            server: mongodb://%mongodb_host%:%mongodb_port%
+
+    document_managers:
+        default:
+            auto_mapping: true
+            logging: false
 
 # Swiftmailer Configuration
 swiftmailer:

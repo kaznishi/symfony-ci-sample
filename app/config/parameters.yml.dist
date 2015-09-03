@@ -2,16 +2,38 @@
 # Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
 # http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
-    database_host:     127.0.0.1
-    database_port:     ~
-    database_name:     symfony
-    database_user:     root
-    database_password: ~
-    test_database_host:     127.0.0.1
-    test_database_port:     ~
-    test_database_name:     symfony
-    test_database_user:     root
-    test_database_password: ~
+    database_default_driver:   pdo_mysql
+    database_default_host:     127.0.0.1
+    database_default_port:     ~
+    database_default_name:     symfony
+    database_default_user:     root
+    database_default_password: ~
+    test_database_default_driver:   pdo_mysql
+    test_database_default_host:     127.0.0.1
+    test_database_default_port:     ~
+    test_database_default_name:     symfony
+    test_database_default_user:     root
+    test_database_default_password: ~
+    database_postgres_driver:   pdo_pgsql
+    database_postgres_host:     127.0.0.1
+    database_postgres_port:     5432
+    database_postgres_name:     symfony
+    database_postgres_user:     root
+    database_postgres_password: ~
+    test_database_postgres_driver:   pdo_pgsql
+    test_database_postgres_host:     127.0.0.1
+    test_database_postgres_port:     5432
+    test_database_postgres_name:     symfony
+    test_database_postgres_user:     root
+    test_database_postgres_password: ~
+    mongodb_name: symfony_mongo
+    mongodb_host: localhost
+    mongodb_port: 27017
+    mongodb_options: {  }
+    test_mongodb_name: symfony_mongo_test
+    test_mongodb_host: localhost
+    test_mongodb_port: 27017
+    test_mongodb_options: {  }
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 
