@@ -1,0 +1,3 @@
+use_postgresql_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: UsePostgresqlBundle:Default:index }
