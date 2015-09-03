@@ -14,6 +14,7 @@ dependencies:
         - yes '' | /home/ubuntu/.phpenv/versions/5.6.5/bin/pecl install -f mongo
         - composer config -g github-oauth.github.com ${GITHUB_ACCESS_TOKEN}
         - composer install --prefer-source --no-interaction
+        - cp ./app/config/parameters.yml.circleci ./app/config/parameters.yml
         - cp ./app/phpunit.xml.dist ./app/phpunit.xml
 
 test:
