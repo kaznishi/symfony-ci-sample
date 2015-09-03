@@ -8,11 +8,6 @@ machine:
         - mongodb
     timezone: Asia/Tokyo
 
-database:
-  post:
-    - mysql -u root < $HOME/$CIRCLE_PROJECT_REPONAME/circle_setup/mysql.sql
-    - psql -U postgres -f $HOME/$CIRCLE_PROJECT_REPONAME/circle_setup/postgres.sql
-
 dependencies:
     pre:
         #composer install
@@ -21,7 +16,13 @@ dependencies:
         - composer install --prefer-source --no-interaction
         - cp ./app/config/parameters.yml.circleci ./app/config/parameters.yml
         - cp ./app/phpunit.xml.dist ./app/phpunit.xml
-        - app/console doctrine:migrations:migrate --env=test --no-interaction
+
+database:
+    post:
+        - mysql -u root < $HOME/$CIRCLE_PROJECT_REPONAME/circle_setup/mysql.sql
+        - app/console doctrine:migrations:migrate --em=default --env=test --no-interaction
+        - psql -U postgres -f $HOME/$CIRCLE_PROJECT_REPONAME/circle_setup/postgres.sql
+        - app/console doctrine:migrations:migrate --em=postgres --env=test --no-interaction
 
 test:
     override:
