@@ -16,6 +16,7 @@ dependencies:
         - composer install --prefer-source --no-interaction
         - cp ./app/config/parameters.yml.circleci ./app/config/parameters.yml
         - cp ./app/phpunit.xml.dist ./app/phpunit.xml
+        - app/console doctrine:migrations:migrate --env=test
 
 test:
     override:
