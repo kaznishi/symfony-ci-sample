@@ -12,7 +12,7 @@ class ShelfRepositoryTest extends MainTestCase
      */
     public function findOneBy()
     {
-        $this->loadFixtures('');
+        $this->loadPostgresFixtures('');
         $em = $this->getPostgresEntityManager();
         $shelf = new Shelf();
         $shelf->setName('asdf');

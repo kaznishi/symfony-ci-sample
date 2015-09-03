@@ -34,3 +34,9 @@ doctrine:
                 user:     %test_database_postgres_user%
                 password: %test_database_postgres_password%
                 charset:  UTF8
+
+doctrine_mongodb:
+    default_database: %test_mongodb_name%
+    connections:
+        default:
+            server: mongodb://%test_mongodb_host%:%test_mongodb_port%

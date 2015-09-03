@@ -52,6 +52,18 @@ abstract class MainTestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * DocumentManagerを取得する
+     * @return \Doctrine\ODM\MongoDB\DocumentManager
+     */
+    public function getDocumentManager() {
+        static $dm;
+        if (empty($dm)) {
+            $dm = $this->getKernel()->getContainer()->get('doctrine_mongodb')->getManager();
+        }
+        return $dm;
+    }
+
+    /**
      * Fiextureを生成する
      * @param array $objects
      */
@@ -107,6 +119,30 @@ abstract class MainTestCase extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * DocumentFiextureを生成する
+     * @param array $objects
+     */
+    protected function loadDocumentFixtures($objects) {
+        if (!is_array($objects)) {
+            $objects = array($objects);
+        }
+
+        $loader = new Loader($this->getKernel()->getContainer());
+        $dm = $this->getDocumentManager();
+
+        foreach ($objects as $object) {
+            if (class_exists($object)) {
+                $loader->addFixture(new $object);
+            }
+        }
+
+        $fixtures = $loader->getFixtures();
+        $purger = new MongoDBPurger($dm);
+        $executor = new MongoDBExecutor($dm, $purger);
+        $executor->execute($fixtures);
+    }
+
 
     /**
      * EntityManagerのモックを取得する
@@ -152,6 +188,35 @@ abstract class MainTestCase extends \PHPUnit_Framework_TestCase
         return $emMock;
     }
 
+    /**
+     * DocumentManagerのモックを取得する
+     * @param Document $repostiroy
+     * @return type
+     */
+    protected function getDocumentManagerMock($repository = null) {
+        $dmMock  = $this->getMock('\Doctrine\ODM\MongoDB\DocumentManager',
+            array('getRepository', 'getClassMetadata', 'persist', 'flush', 'remove', 'clear','createQueryBuilder'), array(), '', false);
+        $this->setRepositories($dmMock, $repository);
+        $dmMock->expects($this->any())
+            ->method('getClassMetadata')
+            ->will($this->returnValue((object)array('name' => 'aClass')));
+        $dmMock->expects($this->any())
+            ->method('persist')
+            ->will($this->returnValue(null));
+        $dmMock->expects($this->any())
+            ->method('flush')
+            ->will($this->returnValue(null));
+        $dmMock->expects($this->any())
+            ->method('merge')
+            ->will($this->returnSelf());
+        $dmMock->expects($this->any())
+            ->method('remove')
+            ->will($this->returnValue(null));
+        $dmMock->expects($this->any())
+            ->method('clear')
+            ->will($this->returnValue(null));
+        return $dmMock;
+    }
 
     /**
      * Repository毎に挙動を変える為
