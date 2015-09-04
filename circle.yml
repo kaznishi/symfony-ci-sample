@@ -26,4 +26,4 @@ database:
 
 test:
     override:
-        - ./bin/phing build
+        - ./bin/phpunit -c ./app/phpunit.xml
